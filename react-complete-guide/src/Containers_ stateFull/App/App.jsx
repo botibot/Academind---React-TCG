@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import cssmodule from "./App.module.scss";
+import cssmodule from "./App.module.css";
 import Persons from "../../Components _stateLess/Persons/Persons";
 import Cockpit from "../../Components _stateLess/Cockpit/Cockpit";
 
 class App extends Component {
+  constructor() {
+    super();
+    console.log("[App.js] constructor");
+    // this.state ={}
+  }
+
   state = {
     persons: [
       { id: "aas1", name: "Jorge", age: 36 },
@@ -12,6 +18,11 @@ class App extends Component {
     ],
     showPersons: false,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((p_erson) => {
@@ -42,6 +53,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] render");
     let persons = null;
     if (this.state.showPersons) {
       persons = (
